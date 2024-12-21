@@ -2,24 +2,41 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { convertSentenceClient } from './actions/actions'; // Updated import
+import { convertSentenceClient } from './actions/actions';
 
 export default function SentenceConverter() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [copySuccess, setCopySuccess] = useState('');
 
   const handleConvert = async (style: 'natural' | 'professional' | 'casual' | 'shorter') => {
     setIsLoading(true);
-    const result = await convertSentenceClient(input, style); // Use the updated function
+    const result = await convertSentenceClient(input, style);
     setIsLoading(false);
     if (result.success) {
       setOutput(result.result);
+      setCopySuccess(''); // Reset copy success message
     } else {
       setOutput('Error: ' + result.error);
     }
+  };
+
+  const handleCopy = () => {
+    if (output) {
+      navigator.clipboard.writeText(output).then(() => {
+        setCopySuccess('Copied to clipboard!');
+        setTimeout(() => setCopySuccess(''), 2000); // Clear message after 2 seconds
+      });
+    }
+  };
+
+  // Automatically adjust the textarea height based on content
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+    e.target.style.height = 'auto'; // Reset the height
+    e.target.style.height = `${e.target.scrollHeight}px`; // Adjust to content
   };
 
   return (
@@ -30,10 +47,12 @@ export default function SentenceConverter() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <Input
+            <textarea
               placeholder="Enter your sentence here"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={handleInputChange}
+              className="w-full p-2 border border-gray-300 rounded resize-none overflow-hidden"
+              rows={1} // Start with a single row
             />
             <div className="grid grid-cols-2 gap-2">
               <Button onClick={() => handleConvert('natural')} disabled={isLoading}>
@@ -52,9 +71,17 @@ export default function SentenceConverter() {
           </div>
         </CardContent>
         <CardFooter>
-          <div className="w-full">
-            <h3 className="text-lg font-semibold mb-2">Result:</h3>
-            <p className="p-2 bg-gray-100 rounded">{isLoading ? 'Converting...' : output}</p>
+          <div className="w-full space-y-2">
+            <h3 className="text-lg font-semibold">Result:</h3>
+            <div className="flex items-center gap-2">
+              <p className="flex-1 p-2 bg-gray-100 rounded">{isLoading ? 'Converting...' : output}</p>
+              {output && (
+                <Button onClick={handleCopy} variant="secondary">
+                  Copy
+                </Button>
+              )}
+            </div>
+            {copySuccess && <p className="text-green-500 text-sm">{copySuccess}</p>}
           </div>
         </CardFooter>
       </Card>

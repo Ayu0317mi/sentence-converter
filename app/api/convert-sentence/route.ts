@@ -12,10 +12,10 @@ export async function POST(request: Request) {
     }
 
     const prompts = {
-      natural: `Convert the following sentence to natural English: "${sentence}"`,
-      professional: `Convert the following sentence to more professional English: "${sentence}"`,
-      casual: `Convert the following sentence to more casual English: "${sentence}"`,
-      shorter: `Shorten the following sentence while maintaining its meaning: "${sentence}"`,
+      natural: `Convert the following sentence to natural English: ${sentence}`,
+      professional: `Convert the following sentence to more professional English: ${sentence}`,
+      casual: `Convert the following sentence to more casual English: ${sentence}`,
+      shorter: `Shorten the following sentence while maintaining its meaning: ${sentence}`,
     };
 
     const prompt = prompts[style as keyof typeof prompts];
