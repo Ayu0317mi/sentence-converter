@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
-const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY; // Use a secure server-side key
+const apiKey = process.env.OPENAI_API_KEY; // Use a secure server-side key
 
 export async function POST(request: Request) {
   try {
