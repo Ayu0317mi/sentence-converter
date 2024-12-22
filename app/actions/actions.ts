@@ -1,4 +1,6 @@
-//actions.ts
+//actions.ts 
+//server-side rendering for the API route
+//English sentence converter
 import dotenv from 'dotenv';
 
 dotenv.config();
