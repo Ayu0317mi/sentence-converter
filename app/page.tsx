@@ -1,3 +1,4 @@
+//page.tsx
 'use client'
 
 import { useState } from 'react';
@@ -43,7 +44,7 @@ export default function SentenceConverter() {
     <div className="container mx-auto p-4">
       <Card className="w-full max-w-2xl mx-auto">
         <CardHeader>
-          <CardTitle>Sentence Converter</CardTitle>
+          <CardTitle>English Sentence Converter</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -56,16 +57,16 @@ export default function SentenceConverter() {
             />
             <div className="grid grid-cols-2 gap-2">
               <Button onClick={() => handleConvert('natural')} disabled={isLoading}>
-                Convert to Natural
+                Natural English
               </Button>
               <Button onClick={() => handleConvert('professional')} disabled={isLoading}>
-                More Professional
+                Professional
               </Button>
               <Button onClick={() => handleConvert('casual')} disabled={isLoading}>
                 More Casual
               </Button>
               <Button onClick={() => handleConvert('shorter')} disabled={isLoading}>
-                Shorter
+                In Short
               </Button>
             </div>
           </div>

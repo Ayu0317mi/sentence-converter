@@ -1,5 +1,5 @@
 // app/actions/japaneseActions.ts
-export async function convertJapaneseClient(sentence: string, style: "polite" | "casual" | "formal") {
+export async function convertJapaneseClient(sentence: string, style: "natural" | "shorter" | "casual" | "formal") {
     try {
       const response = await fetch("/api/convert-japanese", {
         method: "POST",
