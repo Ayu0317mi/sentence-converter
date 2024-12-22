@@ -1,6 +1,6 @@
 # Sentence Converter App
 
-This application allows users to transform sentences into various styles, such as natural, polite, casual, and formal. It supports both English and Japanese sentence conversion and provides an intuitive interface for quick and efficient use.
+This application allows users to transform sentences into various styles, such as natural, formal, casual, and In shorts. It supports both English and Japanese sentence conversion and provides an intuitive interface for quick and efficient use.
 
 ## Features
 
@@ -11,9 +11,9 @@ This application allows users to transform sentences into various styles, such a
   - Shorter (concise) English
 - Convert Japanese sentences to different styles:
   - Natural
-  - Polite
-  - Casual
   - Formal
+  - Casual
+  - Shorter (concise) Japanese
 - Real-time result display
 - Copy results to clipboard with one click
 - Responsive design for mobile and desktop devices
