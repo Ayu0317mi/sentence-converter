@@ -34,6 +34,8 @@ Ensure you have the following installed:
 - Node.js (v16 or higher)
 - npm, yarn, or pnpm (package manager)
 
+##You will also need an OpenAI subscription to access the API required for sentence conversion.
+
 ### Installation
 
 1. Clone the repository:
@@ -119,25 +121,6 @@ To learn more about the technologies used in this project, check out the followi
 - [Next.js Documentation](https://nextjs.org/docs): Comprehensive guide to Next.js features.
 - [React Documentation](https://reactjs.org/docs/getting-started.html): Learn the basics of React.
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs): Explore utility-first styling with Tailwind CSS.
-
-## Contributing
-
-Contributions are welcome! To get started:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add your message here"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. Open a pull request.
 
 ## License
 
