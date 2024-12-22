@@ -1,8 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sentence Converter App
+
+This application allows users to transform sentences into various styles, such as natural, polite, casual, and formal. It supports both English and Japanese sentence conversion and provides an intuitive interface for quick and efficient use.
+
+## Features
+
+- Convert English sentences to different styles:
+  - Natural English
+  - Professional English
+  - Casual English
+  - Shorter (concise) English
+- Convert Japanese sentences to different styles:
+  - Natural
+  - Polite
+  - Casual
+  - Formal
+- Real-time result display
+- Copy results to clipboard with one click
+- Responsive design for mobile and desktop devices
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org): A React framework for building server-side rendered and static web applications.
+- [React](https://reactjs.org): A JavaScript library for building user interfaces.
+- [TypeScript](https://www.typescriptlang.org): A superset of JavaScript that adds static types.
+- Tailwind CSS: For styling the application with utility-first CSS.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Ensure you have the following installed:
+
+- Node.js (v16 or higher)
+- npm, yarn, or pnpm (package manager)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/sentence-converter-app.git
+   cd sentence-converter-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+### Running the App
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -10,27 +63,83 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) in your browser to access the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build the application for production:
+
+```bash
+npm run build
+```
+
+Run the production build:
+
+```bash
+npm start
+```
+
+### Testing
+
+To run tests:
+
+```bash
+npm test
+```
+
+## File Structure
+
+- `app/`
+  - `page.tsx`: Main English sentence converter.
+  - `japanese/page.tsx`: Japanese sentence converter.
+- `components/ui/`: Reusable UI components such as buttons and cards.
+- `actions/`: Logic for sentence conversion (both client and server-side).
+
+## API Integration
+
+The app uses server-side functions to handle sentence conversion. These functions are located in the `actions/` folder and communicate with the backend APIs to process input and return results.
+
+## Deployment
+
+The easiest way to deploy the application is via [Vercel](https://vercel.com). Follow these steps:
+
+1. Push your code to a GitHub repository.
+2. Log in to [Vercel](https://vercel.com) and import the repository.
+3. Set up environment variables if needed.
+4. Click "Deploy" to launch your app.
+
+For more details, check the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project, check out the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs): Comprehensive guide to Next.js features.
+- [React Documentation](https://reactjs.org/docs/getting-started.html): Learn the basics of React.
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs): Explore utility-first styling with Tailwind CSS.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Contributions are welcome! To get started:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. Open a pull request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
