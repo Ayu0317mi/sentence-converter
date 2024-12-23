@@ -9,6 +9,7 @@ import { convertJapaneseClient } from "../actions/japaneseActions";
 export default function JapaneseConverter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [selectedStyle, setSelectedStyle] = useState<"natural" | "shorter" | "casual" | "formal" | "">("");
   const [isLoading, setIsLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState("");
 
@@ -18,6 +19,7 @@ export default function JapaneseConverter() {
       return;
     }
     setIsLoading(true);
+    setSelectedStyle(style); // Set the selected style
     const result = await convertJapaneseClient(input, style);
     setIsLoading(false);
     if (result.success) {
@@ -76,7 +78,12 @@ export default function JapaneseConverter() {
         </CardContent>
         <CardFooter>
           <div className="w-full space-y-2">
-            <h3 className="text-lg font-semibold">Result:</h3>
+            <div className="flex items-center gap-2">
+              <h3 className="text-lg font-semibold">Result:</h3>
+              {selectedStyle && !isLoading && (
+                <span className="text-sm text-gray-600">({selectedStyle} style)</span>
+              )}
+            </div>
             <div className="flex items-center gap-2">
               <p className="flex-1 p-2 bg-gray-100 rounded">
                 {isLoading ? "Converting..." : output}

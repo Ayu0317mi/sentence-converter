@@ -9,16 +9,18 @@ import { convertSentenceClient } from './actions/actions';
 export default function SentenceConverter() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
+  const [selectedStyle, setSelectedStyle] = useState<'natural' | 'professional' | 'casual' | 'shorter' | ''>('');
   const [isLoading, setIsLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState('');
 
   const handleConvert = async (style: 'natural' | 'professional' | 'casual' | 'shorter') => {
     setIsLoading(true);
+    setSelectedStyle(style); 
     const result = await convertSentenceClient(input, style);
     setIsLoading(false);
     if (result.success) {
       setOutput(result.result);
-      setCopySuccess(''); // Reset copy success message
+      setCopySuccess(''); 
     } else {
       setOutput('Error: ' + result.error);
     }
@@ -37,7 +39,7 @@ export default function SentenceConverter() {
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value);
     e.target.style.height = 'auto'; // Reset the height
-    e.target.style.height = `${e.target.scrollHeight}px`; // Adjust to content
+    e.target.style.height = `${e.target.scrollHeight}px`; 
   };
 
   return (
@@ -73,7 +75,12 @@ export default function SentenceConverter() {
         </CardContent>
         <CardFooter>
           <div className="w-full space-y-2">
-            <h3 className="text-lg font-semibold">Result:</h3>
+            <div className="flex items-center gap-2">
+              <h3 className="text-lg font-semibold">Result:</h3>
+              {selectedStyle && (
+                <span className="text-sm text-gray-600">({selectedStyle})</span>
+              )}
+            </div>
             <div className="flex items-center gap-2">
               <p className="flex-1 p-2 bg-gray-100 rounded">{isLoading ? 'Converting...' : output}</p>
               {output && (
