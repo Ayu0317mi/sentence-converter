@@ -9,11 +9,11 @@ import { convertSentenceClient } from './actions/actions';
 export default function SentenceConverter() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
-  const [selectedStyle, setSelectedStyle] = useState<'natural' | 'professional' | 'casual' | 'shorter' | ''>('');
+  const [selectedStyle, setSelectedStyle] = useState<'natural' | 'professional' | 'casual' | 'shorter' | 'aussie' | ''>('');
   const [isLoading, setIsLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState('');
 
-  const handleConvert = async (style: 'natural' | 'professional' | 'casual' | 'shorter') => {
+  const handleConvert = async (style: 'natural' | 'professional' | 'casual' | 'shorter' | 'aussie') => {
     setIsLoading(true);
     setSelectedStyle(style); 
     const result = await convertSentenceClient(input, style);
@@ -69,6 +69,9 @@ export default function SentenceConverter() {
               </Button>
               <Button onClick={() => handleConvert('shorter')} disabled={isLoading}>
                 In Short
+              </Button>
+              <Button onClick={() => handleConvert('aussie')} disabled={isLoading}>
+                Aussie Slang
               </Button>
             </div>
           </div>

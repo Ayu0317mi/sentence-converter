@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-type Style = 'natural' | 'professional' | 'casual' | 'shorter';
+type Style = 'natural' | 'professional' | 'casual' | 'shorter' | 'aussie';
 
 export async function convertSentenceClient(sentence: string, style: Style) {
   console.log('Sending request to /api/convert-sentence:', { sentence, style });

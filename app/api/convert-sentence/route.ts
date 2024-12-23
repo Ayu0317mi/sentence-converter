@@ -18,6 +18,7 @@ export async function POST(request: Request) {
       professional: `Convert the following sentence to more professional English: ${sentence}`,
       casual: `Convert the following sentence to more casual English: ${sentence}`,
       shorter: `Shorten the following sentence while maintaining its meaning: ${sentence}`,
+      aussie: `Convert the following sentence to Australian slang English: ${sentence}`,
     };
 
     const prompt = prompts[style as keyof typeof prompts];
