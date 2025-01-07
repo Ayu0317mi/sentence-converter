@@ -17,10 +17,11 @@ export async function POST(req: NextRequest) {
   }
 
   const prompts: Record<string, string> = {
-    natural: `自然な日本語に変換してください: ${sentence}`,
-    shorter: `この文を簡潔な日本語に変換してください: ${sentence}`,
-    casual: `この文をカジュアルな日本語に変換してください: ${sentence}`,
-    formal: `この文をフォーマルな日本語に変換してください: ${sentence}`,
+    natural: `Case 1: If the sentence is in Japanese, convert it to natural Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Case 2: If the sentence is in English, convert it to natural Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Output the converted sentence only.`,
+    formal: `Case 1: If the sentence is in Japanese, convert it to formal Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Case 2: If the sentence is in English, convert it to formal Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Output the converted sentence only.`,
+    casual: `Case 1: If the sentence is in Japanese, convert it to casual Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Case 2: If the sentence is in English, convert it to casual Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Output the converted sentence only.`,
+    shorter: `Case 1: If the sentence is in Japanese, shorten it to natural Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Case 2: If the sentence is in English, shorten it to natural Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Output the shortened sentence only.`,
+    kansai: `Case 1: If the sentence is in Japanese, convert it to Kansai dialect Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Case 2: If the sentence is in English, convert it to Kansai dialect Japanese and provide the output in both Japanese characters and Romanized (Latin) alphabet: ${sentence}. Format the output as follows: Japanese sentence (Romanized version). Output the converted sentence only.`,
   };
 
   const prompt = prompts[style];

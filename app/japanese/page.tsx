@@ -9,11 +9,11 @@ import { convertJapaneseClient } from "../actions/japaneseActions";
 export default function JapaneseConverter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [selectedStyle, setSelectedStyle] = useState<"natural" | "shorter" | "casual" | "formal" | "">("");
+  const [selectedStyle, setSelectedStyle] = useState<"natural" | "shorter" | "casual" | "formal" | "kansai" | "">("");
   const [isLoading, setIsLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState("");
 
-  const handleConvert = async (style: "natural" | "shorter" | "casual" | "formal") => {
+  const handleConvert = async (style: "natural" | "shorter" | "casual" | "formal" | "kansai") => {
     if (!input.trim()) {
       setOutput("Please enter a sentence to convert.");
       return;
@@ -72,6 +72,9 @@ export default function JapaneseConverter() {
               </Button>
               <Button onClick={() => handleConvert("shorter")} disabled={isLoading}>
                 In Short
+              </Button>
+              <Button onClick={() => handleConvert("kansai")} disabled={isLoading}>
+                Kansai-ben
               </Button>
             </div>
           </div>
