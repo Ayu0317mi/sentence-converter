@@ -14,6 +14,9 @@ export function Header() {
                 <Link href="/japanese" className="text-sm font-medium hover:underline underline-offset-4">
                     Japanese
                 </Link>
+                <Link href="/test" className="text-sm font-medium hover:underline underline-offset-4">
+                    Llama 
+                </Link>
             </nav>
         </header>
     );
