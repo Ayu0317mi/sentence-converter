@@ -3,18 +3,28 @@ import { Groq } from 'groq-sdk';
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+const prompts = {
+  natural: (sentence: string) => `Convert the following sentence to natural English: ${sentence}. Output the converted sentence only.`,
+  professional: (sentence: string) => `Convert the following sentence to more professional English: ${sentence}. Output the converted sentence only.`,
+  casual: (sentence: string) => `Convert the following sentence to more casual English: ${sentence}. Output the converted sentence only.`,
+  shorter: (sentence: string) => `Shorten the following sentence while maintaining its meaning: ${sentence}. Output the shortened sentence only.`,
+  aussie: (sentence: string) => `Convert the following sentence to Australian slang English: ${sentence}. Output the converted sentence only.`,
+};
+
 export async function POST(req: Request) {
   try {
-    const { sentence, style } = await req.json();
+    const { sentence, style }: { sentence: string; style: keyof typeof prompts } = await req.json();
     
-    if (!sentence || !style) {
-      return NextResponse.json({ error: 'Sentence and style are required' }, { status: 400 });
+    if (!sentence || !style || !(style in prompts)) {
+      return NextResponse.json({ error: 'Invalid sentence or style' }, { status: 400 });
     }
 
-    const chatCompletion = await getGroqChatCompletion(sentence, style);
+    const prompt = prompts[style](sentence);
+    const result = await getGroqChatCompletion(prompt);
 
-    if ('choices' in chatCompletion) {
-      return NextResponse.json({ result: chatCompletion.choices[0]?.message?.content });
+    if ('choices' in result) {
+      const convertedSentence = result.choices[0]?.message?.content?.trim();
+      return NextResponse.json({ result: convertedSentence });
     }
 
     return NextResponse.json({ error: 'Failed to fetch from API' }, { status: 500 });
@@ -24,13 +34,13 @@ export async function POST(req: Request) {
   }
 }
 
-async function getGroqChatCompletion(sentence: string, style: string) {
+async function getGroqChatCompletion(prompt: string) {
   try {
     return await groq.chat.completions.create({
       messages: [
         {
-          role: 'system',
-          content: `You are an expert in English language processing. Convert the following sentence into ${style}: ${sentence}`,
+          role: 'user',
+          content: prompt,
         },
       ],
       model: 'llama-3.3-70b-versatile',
