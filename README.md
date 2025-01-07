@@ -34,8 +34,6 @@ Ensure you have the following installed:
 - Node.js (v16 or higher)
 - npm, yarn, or pnpm (package manager)
 
-##You will also need an OpenAI subscription to access the API required for sentence conversion.
-
 ### Installation
 
 1. Clone the repository:
