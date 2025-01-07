@@ -1,8 +1,8 @@
-//layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +29,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {children}
+        <div className="flex flex-col h-screen">
+          {/* Header sticks to the top */}
+          <Header />
+
+          {/* Main content area grows to fill the space */}
+          <main className="flex-grow">{children}</main>
+
+          {/* Footer sticks to the bottom */}
+          <Footer />
+        </div>
       </body>
     </html>
   );
