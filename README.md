@@ -25,7 +25,7 @@ This application allows users to transform sentences into various styles, such a
 - [React](https://reactjs.org): A JavaScript library for building user interfaces.
 - [TypeScript](https://www.typescriptlang.org): A superset of JavaScript that adds static types.
 - Tailwind CSS: For styling the application with utility-first CSS.
-- [Model]: llama-3.3-70b-versatile
+- AI Model: llama-3.3-70b-versatile
 
 ## Getting Started
 
