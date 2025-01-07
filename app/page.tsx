@@ -59,13 +59,13 @@ export default function SentenceConverter() {
             />
             <div className="grid grid-cols-2 gap-2">
               <Button onClick={() => handleConvert('natural')} disabled={isLoading}>
-                Natural English
+                Natural
               </Button>
               <Button onClick={() => handleConvert('professional')} disabled={isLoading}>
                 Professional
               </Button>
               <Button onClick={() => handleConvert('casual')} disabled={isLoading}>
-                More Casual
+                Casual
               </Button>
               <Button onClick={() => handleConvert('shorter')} disabled={isLoading}>
                 In Short

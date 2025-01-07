@@ -1,48 +1,54 @@
 //app/api/convert-sentence/route.ts
 //For English converter
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { Groq } from 'groq-sdk';
 
-const apiKey = process.env.OPENAI_API_KEY; // Use a secure server-side key
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-export async function POST(request: Request) {
+const prompts = {
+  natural: (sentence: string) => `Convert the following sentence to natural English: ${sentence}. Output the converted sentence only.`,
+  professional: (sentence: string) => `Convert the following sentence to more professional English: ${sentence}. Output the converted sentence only.`,
+  casual: (sentence: string) => `Convert the following sentence to more casual English: ${sentence}. Output the converted sentence only.`,
+  shorter: (sentence: string) => `Shorten the following sentence while maintaining its meaning: ${sentence}. Output the shortened sentence only.`,
+  aussie: (sentence: string) => `Convert the following sentence to Australian slang English: ${sentence}. Output the converted sentence only.`,
+};
+
+export async function POST(req: Request) {
   try {
-    const { sentence, style } = await request.json(); // Parse JSON from the request body
-
-    if (!sentence || !style) {
-      return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
+    const { sentence, style }: { sentence: string; style: keyof typeof prompts } = await req.json();
+    
+    if (!sentence || !style || !(style in prompts)) {
+      return NextResponse.json({ error: 'Invalid sentence or style' }, { status: 400 });
     }
 
-    const prompts = {
-      natural: `Convert the following sentence to natural English: ${sentence}`,
-      professional: `Convert the following sentence to more professional English: ${sentence}`,
-      casual: `Convert the following sentence to more casual English: ${sentence}`,
-      shorter: `Shorten the following sentence while maintaining its meaning: ${sentence}`,
-      aussie: `Convert the following sentence to Australian slang English: ${sentence}`,
-    };
+    const prompt = prompts[style](sentence);
+    const result = await getGroqChatCompletion(prompt);
 
-    const prompt = prompts[style as keyof typeof prompts];
-    if (!prompt) {
-      return NextResponse.json({ error: 'Unsupported style' }, { status: 400 });
+    if ('choices' in result) {
+      const convertedSentence = result.choices[0]?.message?.content?.trim();
+      return NextResponse.json({ result: convertedSentence });
     }
 
-    const openai = new OpenAI({ apiKey });
-
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: [
-        { role: 'system', content: 'You are an expert in English language processing.' },
-        { role: 'user', content: prompt },
-      ],
-      temperature: 0.7,
-      max_tokens: 256,
-    });
-
-    const result = response.choices[0]?.message?.content?.trim() ?? 'No output generated';
-
-    return NextResponse.json({ result });
+    return NextResponse.json({ error: 'Failed to fetch from API' }, { status: 500 });
   } catch (error) {
     console.error('Error in API handler:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
+async function getGroqChatCompletion(prompt: string) {
+  try {
+    return await groq.chat.completions.create({
+      messages: [
+        {
+          role: 'user',
+          content: prompt,
+        },
+      ],
+      model: 'llama-3.3-70b-versatile',
+    });
+  } catch (error) {
+    console.error('Error in getGroqChatCompletion:', error);
+    throw new Error('Failed to fetch from Groq');
   }
 }

@@ -54,7 +54,7 @@ export default function JapaneseConverter() {
         <CardContent>
           <div className="space-y-4">
             <textarea
-              placeholder="Enter your sentence in Japanese"
+              placeholder="Enter your sentence here"
               value={input}
               onChange={handleInputChange}
               className="w-full p-2 border border-gray-300 rounded resize-none overflow-hidden"

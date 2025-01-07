@@ -1,13 +1,13 @@
 // app/api/convert-japanese/route.ts
 //For Japanese converter
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
+import { Groq } from "groq-sdk";
 
-const apiKey = process.env.OPENAI_API_KEY;
+const apiKey = process.env.GROQ_API_KEY;
 
 export async function POST(req: NextRequest) {
   if (!apiKey) {
-    return NextResponse.json({ error: "Missing OpenAI API key" }, { status: 500 });
+    return NextResponse.json({ error: "Missing GROQ API key" }, { status: 500 });
   }
 
   const { sentence, style } = await req.json();
@@ -29,12 +29,11 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const openai = new OpenAI({ apiKey });
+    const groq = new Groq({ apiKey });
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-4",
+    const response = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
       messages: [
-        { role: "system", content: "You are an expert in Japanese language processing." },
         { role: "user", content: prompt },
       ],
       temperature: 0.7,
