@@ -62,7 +62,7 @@ export default function JapaneseConverter() {
             />
             <div className="grid grid-cols-2 gap-2">
               <Button onClick={() => handleConvert("natural")} disabled={isLoading}>
-                Natural Japanese
+                Natural
               </Button>
               <Button onClick={() => handleConvert("formal")} disabled={isLoading}>
                 Formal
@@ -72,9 +72,6 @@ export default function JapaneseConverter() {
               </Button>
               <Button onClick={() => handleConvert("shorter")} disabled={isLoading}>
                 In Short
-              </Button>
-              <Button onClick={() => handleConvert("kansai")} disabled={isLoading}>
-                Kansai-ben
               </Button>
             </div>
           </div>
