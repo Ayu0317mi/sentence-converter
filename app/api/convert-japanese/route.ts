@@ -17,10 +17,22 @@ export async function POST(req: NextRequest) {
   }
 
   const prompts: Record<string, string> = {
-    natural: `You are an assistant that helps with translating sentences into natural Japanese. Translate the following sentence to natural Japanese and Romanized Japanese: ${sentence}.Output the converted sentence only.`,
-    formal: `You are an assistant that helps with translating sentences into formal Japanese. Translate the following sentence to formal Japanese and Romanized Japanese: ${sentence}.Output the converted sentence only.`,
-    casual: `You are an assistant that helps with translating sentences into casual Japanese. Translate the following sentence to casual Japanese and Romanized Japanese: ${sentence}.Output the converted sentence only.`,
-    shorter: `You are an assistant that helps with translating sentences into shorter Japanese. Translate the following sentence to shorter Japanese and Romanized Japanese: ${sentence}.Output the converted sentence only.`,
+    natural:
+      `You are an assistant that helps with translating sentences into natural Japanese.
+     Translate the following sentence to natural Japanese and Romanized Japanese: ${sentence}.
+     Output the converted sentence only.`,
+    formal: 
+      `You are an assistant that helps with translating sentences into Japanese. 
+      Translate the following sentence to natural and formal Japanese and Romanized Japanese: ${sentence}.
+      Output the converted sentence only.`,
+    casual: 
+    `You are an assistant that helps with translating sentences into Japanese. 
+    Translate the following sentence to natural and casual Japanese and Romanized Japanese: ${sentence}.
+    Output the converted sentence only.`,
+    shorter: 
+    `You are an assistant that helps with translating sentences into Japanese. 
+    Translate and shorten the following sentence to natural Japanese and Romanized Japanese:  ${sentence}.
+    Output the converted sentence only.`,
   };
 
   const prompt = prompts[style];
