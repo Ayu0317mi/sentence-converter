@@ -52,7 +52,9 @@ export async function POST(req: NextRequest) {
       max_tokens: 256,
     });
 
-    const result = response.choices[0]?.message?.content?.trim() ?? "No output generated";
+    const rawContent = response.choices[0]?.message?.content?.trim() ?? "No output generated";
+    // Remove thinking tags and extract only the final response
+    const result = rawContent.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
     return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     console.error("Error in Japanese sentence conversion:", error);

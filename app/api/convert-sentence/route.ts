@@ -25,7 +25,9 @@ export async function POST(req: Request) {
     const result = await getGroqChatCompletion(prompt);
 
     if ('choices' in result) {
-      const convertedSentence = result.choices[0]?.message?.content?.trim();
+      const rawContent = result.choices[0]?.message?.content?.trim() || '';
+      // Remove thinking tags and extract only the final response
+      const convertedSentence = rawContent.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
       return NextResponse.json({ result: convertedSentence });
     }
 
