@@ -6,11 +6,11 @@ import { Groq } from 'groq-sdk';
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const prompts = {
-  natural: (sentence: string) => `Convert the following sentence to natural English: ${sentence}. Output the converted sentence only.`,
-  professional: (sentence: string) => `Convert the following sentence to more professional English: ${sentence}. Output the converted sentence only.`,
-  casual: (sentence: string) => `Convert the following sentence to more casual English: ${sentence}. Output the converted sentence only.`,
-  shorter: (sentence: string) => `Shorten the following sentence while maintaining its meaning: ${sentence}. Output the shortened sentence only.`,
-  aussie: (sentence: string) => `Convert the following sentence to Australian slang English: ${sentence}. Output the converted sentence only.`,
+  natural: (sentence: string) => `Convert the following sentence to natural English: ${sentence}. Do not include any thinking process or explanations. Output only the converted sentence.`,
+  professional: (sentence: string) => `Convert the following sentence to more professional English: ${sentence}. Do not include any thinking process or explanations. Output only the converted sentence.`,
+  casual: (sentence: string) => `Convert the following sentence to more casual English: ${sentence}. Do not include any thinking process or explanations. Output only the converted sentence.`,
+  shorter: (sentence: string) => `Shorten the following sentence while maintaining its meaning: ${sentence}. Do not include any thinking process or explanations. Output only the shortened sentence.`,
+  aussie: (sentence: string) => `Convert the following sentence to Australian slang English: ${sentence}. Do not include any thinking process or explanations. Output only the converted sentence.`,
 };
 
 export async function POST(req: Request) {
@@ -48,6 +48,8 @@ async function getGroqChatCompletion(prompt: string) {
         },
       ],
       model: 'qwen/qwen3.6-27b',
+      temperature: 0.7,
+      max_tokens: 512,
     });
   } catch (error) {
     console.error('Error in getGroqChatCompletion:', error);

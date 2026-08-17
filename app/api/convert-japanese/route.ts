@@ -20,19 +20,19 @@ export async function POST(req: NextRequest) {
     natural:
       `You are an assistant that helps with translating sentences into natural Japanese.
      Translate the following sentence to natural Japanese and Romanized Japanese: ${sentence}.
-     Output the converted sentence only.`,
+     Do not include any thinking process or explanations. Output only the converted sentence.`,
     formal: 
       `You are an assistant that helps with translating sentences into Japanese. 
       Translate the following sentence to natural and formal Japanese and Romanized Japanese: ${sentence}.
-      Output the converted sentence only.`,
+      Do not include any thinking process or explanations. Output only the converted sentence.`,
     casual: 
     `You are an assistant that helps with translating sentences into Japanese. 
     Translate the following sentence to natural and casual Japanese and Romanized Japanese: ${sentence}.
-    Output the converted sentence only.`,
+    Do not include any thinking process or explanations. Output only the converted sentence.`,
     shorter: 
     `You are an assistant that helps with translating sentences into Japanese. 
     Translate and shorten the following sentence to natural Japanese and Romanized Japanese:  ${sentence}.
-    Output the converted sentence only.`,
+    Do not include any thinking process or explanations. Output only the converted sentence.`,
   };
 
   const prompt = prompts[style];
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
         { role: "user", content: prompt },
       ],
       temperature: 0.7,
-      max_tokens: 256,
+      max_tokens: 512,
     });
 
     const rawContent = response.choices[0]?.message?.content?.trim() ?? "No output generated";
