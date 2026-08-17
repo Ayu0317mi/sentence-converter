@@ -44,17 +44,16 @@ export async function POST(req: NextRequest) {
     const groq = new Groq({ apiKey });
 
     const response = await groq.chat.completions.create({
-      model: "qwen/qwen3.6-27b",
+      model: "openai/gpt-oss-120b",
       messages: [
         { role: "user", content: prompt },
       ],
-      temperature: 0.7,
-      max_tokens: 512,
+      temperature: 1,
+      max_tokens: 2048,
+      top_p: 1,
     });
 
-    const rawContent = response.choices[0]?.message?.content?.trim() ?? "No output generated";
-    // Remove thinking tags and extract only the final response
-    const result = rawContent.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    const result = response.choices[0]?.message?.content?.trim() ?? "No output generated";
     return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     console.error("Error in Japanese sentence conversion:", error);

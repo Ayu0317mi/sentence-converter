@@ -25,9 +25,7 @@ export async function POST(req: Request) {
     const result = await getGroqChatCompletion(prompt);
 
     if ('choices' in result) {
-      const rawContent = result.choices[0]?.message?.content?.trim() || '';
-      // Remove thinking tags and extract only the final response
-      const convertedSentence = rawContent.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+      const convertedSentence = result.choices[0]?.message?.content?.trim();
       return NextResponse.json({ result: convertedSentence });
     }
 
@@ -47,9 +45,10 @@ async function getGroqChatCompletion(prompt: string) {
           content: prompt,
         },
       ],
-      model: 'qwen/qwen3.6-27b',
-      temperature: 0.7,
-      max_tokens: 512,
+      model: 'openai/gpt-oss-120b',
+      temperature: 1,
+      max_tokens: 2048,
+      top_p: 1,
     });
   } catch (error) {
     console.error('Error in getGroqChatCompletion:', error);
