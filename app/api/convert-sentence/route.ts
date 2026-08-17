@@ -45,7 +45,7 @@ async function getGroqChatCompletion(prompt: string) {
           content: prompt,
         },
       ],
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.6-27b',
     });
   } catch (error) {
     console.error('Error in getGroqChatCompletion:', error);
